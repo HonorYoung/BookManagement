@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry location="D:\apache-maven-3.3.9\repository\com\oracle\ojdbc6\12.1.0.1-atlassian-hosted\ojdbc6-12.1.0.1-atlassian-hosted.jar" />
+
+    <context id="Oracle" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+                        userId="scott"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!--生成实体类-->
+        <javaModelGenerator targetPackage="com.liyang.user.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--生成xml文件-->
+        <sqlMapGenerator targetPackage="mappers"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!--生成Mapper-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.liyang.user.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <table schema="scott"
+               tableName="stu"
+               domainObjectName="Stu" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="select sys_guid() as id from dual" identity="false" />
+        </table>
+        <!--<table schema="scott" tableName="bookpic" domainObjectName="Bookpic" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="select sys_guid() as id from dual" identity="false" />
+        </table>-->
+
+    </context>
+</generatorConfiguration>

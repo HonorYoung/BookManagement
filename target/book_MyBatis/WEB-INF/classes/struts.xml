@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+		"http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+	<!--struts.multipart.maxSize=2097152-->
+	<constant name="struts.multipart.maxSize" value="2048000"></constant>
+	<package name="supplier" extends="json-default">
+		<global-results>
+			<result name="input">error.jsp</result>
+		</global-results>
+		<action name="*_book" class="com.liyang.book.action.BookAction" method="{1}">
+			<result name="addSuccess">addBook.jsp</result>
+			<result name="querySuccess" type="json">
+				<param name="root">page</param>
+			</result>
+			<result name="success" type="json">
+				<param name="root">map</param>
+			</result>
+			<allowed-methods>addBook,querySomeBook,queryPicsByPid,addPic,delPic,setPicAsFM</allowed-methods>
+		</action>
+		<action name="*_shop" class="com.liyang.shopping.action.ShopAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">page</param>
+			</result>
+			<result name="addsuccess" type="json">
+				<param name="root">map</param>
+			</result>
+			<allowed-methods>showBooksToCustomer,addCar,removeOne,addOne</allowed-methods>
+		</action>
+
+		<action name="*_gys" class="com.liyang.gys.action.GysAction" method="{1}">
+			<result name="success" type="redirect">addSupplier.jsp</result>
+			<result name="querySuccess" type="json">
+				<param name="root">page</param>
+			</result>
+			<result name="querySimpleSuccess" type="json">
+				<param name="root">map</param>
+			</result>
+			<allowed-methods>addSupplier,querySomeSupplier,querySupplier,queryAllSupplier</allowed-methods>
+		</action>
+		<action name="*_add" class="com.liyang.gys.action.queryAddressAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">map</param>
+			</result>
+			<allowed-methods>queryCity,queryProvince</allowed-methods>
+		</action>
+		<action name="*_cate" class="com.liyang.category.action.CategoryAction" method="{1}">
+			<result name="addSuccess">addCategory.jsp</result>
+			<result name="querySuccess" type="json">
+				<param name="root">page</param>
+			</result>
+			<result name="querySimpleSuccess" type="json">
+				<param name="root">map</param>
+			</result>
+			<allowed-methods>addCategory,queryCategory,queryAllCategory,querySomeCategory</allowed-methods>
+		</action>
+	</package>
+	<!--<package name="login" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInter" class="com.liyang.interceptor.LoginInter"></interceptor>
+		</interceptors>
+		<global-results>
+			<result name="relogin">login.jsp</result>
+		</global-results>
+		<action name="login" class="com.liyang.user.action.LoginAction" method="login">
+			<result name="login_success">index.jsp</result>
+		</action>
+		<action name="main" class="com.liyang.user.action.LoginAction" method="main">
+			<result name="success">index.jsp</result>
+			<interceptor-ref name="loginInter"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>-->
+</struts>
